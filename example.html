@@ -22,6 +22,19 @@
       padding: 0;
       margin: 0;
     }
+
+    #bar {
+      z-index: 2;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 4px;
+    }
+
+    #boton {
+      width: 128px;
+      height: 64px;
+    }
   </style>
    <!-- Drop your code between the script tags below! -->
    <script type="infowindow/html" id="infowindow_template">
@@ -39,6 +52,14 @@
 
 <body>
   <div id="map"></div>
+
+
+
+  <div id="bar">
+    <button id="layer0">Toggle States</button>
+    <button id="layer1">Toggle Trees</button>
+  </div>
+
   <script>
 
       $(document).ready(function() { 
@@ -88,6 +109,13 @@
             {infowindowTemplate: $('#infowindow_template').html()}
           );
     
+          // Toggle buttons
+          $('#layer0').on('click', function() {
+            layer.getSubLayer(0).toggle();
+          });
+          $('#layer1').on('click', function() {
+            layer.getSubLayer(1).toggle();
+          });
         })
         .error(function (err) {
             console.log("error: " + err);
