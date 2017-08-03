@@ -1,0 +1,4 @@
+[carto]
+base_url=https://your_user.carto.com/
+api_key=YOUR_API_KEY_HERE
+map_list=maps.csv

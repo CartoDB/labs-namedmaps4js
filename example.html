@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Training | createLayer with a named map| CartoDB.js</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+  <link rel="stylesheet" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+  <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+
+    #map {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+   <!-- Drop your code between the script tags below! -->
+   <script type="infowindow/html" id="infowindow_template">
+      <div class="cartodb-popup">
+        <a href="#close" class="cartodb-popup-close-button close">x</a>
+         <div class="cartodb-popup-content-wrapper">
+           <div class="cartodb-popup-content">
+             <p>{{content.data.common_species}}</p>
+           </div>
+         </div>
+         <div class="cartodb-popup-tip-container"></div>
+      </div>
+    </script>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+
+      $(document).ready(function() { 
+        var myLayer, mySubLayer;
+        var map = L.map('map', {
+            zoomControl: true,
+            center: [37.756941,-122.449408],
+            zoom: 12
+        });
+        
+        L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+        }).addTo(map);
+
+        var namedLayerSource = {
+            user_name: 'carto',
+            type: 'namedmap',
+            maps_api_template: "https://test21.cartodb.solutions:443/user/{user}",
+            sql_api_template: "https://test21.cartodb.solutions:443/user/{user}",
+            named_map: {
+                name: "tpl_488f1fa4_04bf_4c35_88f9_75c0b7f66831_mod",
+                layers:[
+                  {
+                    layer_name: "layer0" //states boundaries
+                  },
+                  {
+                    layer_name : "layer1", 
+                    interactivity: ["common_species"] // trees
+                  }
+                ]
+            }
+        };
+
+       // add cartodb layer with one sublayer
+        cartodb.createLayer(map, namedLayerSource, {
+            https: true
+        })
+        .addTo(map)
+        .done(function (layer) {
+          console.log(layer);
+          
+          // add an infowindow
+          cdb.vis.Vis.addInfowindow(
+            map, 
+            layer.getSubLayer(1),
+            ['cartodb_id','common_species'],
+            {infowindowTemplate: $('#infowindow_template').html()}
+          );
+    
+        })
+        .error(function (err) {
+            console.log("error: " + err);
+        });
+      });
+  </script>
+</body>
+</html>
