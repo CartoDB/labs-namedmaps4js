@@ -17,7 +17,7 @@ Mind that this scripts assumes your maps **don't have analyses**, otherwise it w
 
 The script will create new templates with the suffix `_mod` that are ready to use from your CartoDB.js v3 applications. There is an `example.html` to see how to load this named map template and add a custom infowindow.
 
-In any case the basic snippet is:
+In any case the basic snippet is and you can see it live [here](https://rawgit.com/CartoDB/labs-namedmaps4js/master/example.html).
 
 ```js
   var namedLayerSource = {
