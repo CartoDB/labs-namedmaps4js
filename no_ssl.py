@@ -1,3 +1,10 @@
+'''
+Snippet brought from StackOverflow[1] from the user Blender[2]
+
+[1] https://stackoverflow.com/a/15445989/3647833
+[2] https://stackoverflow.com/users/464744/blender
+'''
+
 import warnings
 import requests
 import contextlib
