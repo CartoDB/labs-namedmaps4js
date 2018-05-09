@@ -26,6 +26,7 @@ def modify_template(template):
 
     # For every cartodb layer
     layer_id_counter = 0
+
     for layer in input_layers:
 
         if layer['type'] == 'cartodb':
@@ -46,6 +47,11 @@ def modify_template(template):
             del(options['sql_wrap'])
 
             layer_id_counter = layer_id_counter + 1
+    
+    # Removing HTTP layers
+    for layer in input_layers:
+        if layer['type'] == 'http':
+            input_layers.remove(layer)
 
     # Remove BUILDER objects
     del(layergroup['analyses'])
