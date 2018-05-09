@@ -48,10 +48,7 @@ def modify_template(template):
 
             layer_id_counter = layer_id_counter + 1
     
-    # Removing HTTP layers
-    for layer in input_layers:
-        if layer['type'] == 'http':
-            input_layers.remove(layer)
+
 
     # Remove BUILDER objects
     del(layergroup['analyses'])
