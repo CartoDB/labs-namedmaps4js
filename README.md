@@ -39,7 +39,8 @@ In any case the basic snippet is and you can see it live [here](https://rawgit.c
 
   / add cartodb layer with one sublayer
   cartodb.createLayer(map, namedLayerSource, {
-      https: true
+      https  : true,
+      filter : ['mapnik']
   })
   .addTo(map)
   .done(function (layer)
